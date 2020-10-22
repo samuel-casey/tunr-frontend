@@ -5,6 +5,8 @@ Project by Kim Rasmussen, Sam Casey, Quinton Lythgoe, Jaime Bondoc.
 
 Backend [repo](https://github.com/samuel-casey/tunr-backend)
 
+---
+
 ## Available Scripts
 
 In the project directory, you can run:
