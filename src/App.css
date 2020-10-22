@@ -10,4 +10,5 @@ h2 {
   text-align: right;
   font-size: 25px;
   padding: 10px;
+  border-bottom: solid red 5px;
 }
