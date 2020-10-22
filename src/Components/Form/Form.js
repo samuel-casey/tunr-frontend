@@ -13,7 +13,7 @@ function Form(props) {
 	const handleSubmit = (event) => {
 		event.preventDefault(); // Prevent Form from Refreshing
 		console.log('formdata: ', formData);
-		// props.handleSubmit(formData); // Submit to Parents desired function
+		props.handleSubmit(formData); // Submit to Parents desired function
 		// props.history.push('/'); //Push back to display page
 	};
 
@@ -30,14 +30,14 @@ function Form(props) {
 				/>
 				<input
 					type='text'
-					name='title'
+					name='artist'
 					value={formData.artist}
 					placeholder='Artist'
 					onChange={handleChange}
 				/>
 				<input
 					type='text'
-					name='title'
+					name='time'
 					value={formData.time}
 					placeholder='Time'
 					onChange={handleChange}
