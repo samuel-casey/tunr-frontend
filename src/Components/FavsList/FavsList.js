@@ -1,21 +1,33 @@
 import React from 'react';
+import './FavsList.css';
 
-const FavsList = (props) => {
-	// const { favs } = props;
+function FavsList(props) {
+	const loaded = props.songs.map((song, index) => {
+		return (
+			<div className='song' key={index}>
+				<div>
+					<span className='song-title'>
+						<b>Title:</b> {song.title}
+					</span>
+					<span className='song-artist'>
+						<b>Artist:</b> {song.artist}
+					</span>
+					<span className='song-time'>
+						<b>Time:</b> {song.time}
+					</span>
+				</div>
+			</div>
+		);
+	});
+}
+const loading = 'Loading...';
 
-	const favs = [{ artist: 'Ed Sheeran', title: 'All on Me', time: '3:18' }];
+return (
+	<>
+		<h3>My Fave List</h3>
+		{props.songs.length > 0 ? loaded : loading}
+	</>
+);
 
-	const loaded = favs.map((fav) => (
-		<div className='FavsList'>
-			<article>
-				<h3>{fav.artist}</h3>
-				<h3>{fav.title}</h3>
-				<h3>{fav.time}</h3>
-			</article>
-		</div>
-	));
-
-	return favs.length > 0 ? loaded : <h1>Loading...</h1>;
-};
 
 export default FavsList;
