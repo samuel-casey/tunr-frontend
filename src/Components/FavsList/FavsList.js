@@ -29,4 +29,5 @@ return (
 	</>
 );
 
+
 export default FavsList;
