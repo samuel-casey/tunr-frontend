@@ -10,19 +10,6 @@ const FavsList = (props) => {
 					<h3>{song.artist}</h3>
 					<h3>{song.title}</h3>
 					<h3>{song.time}</h3>
-					<button
-						onClick={() => {
-							props.selectSong(song);
-							props.history.push('/edit');
-						}}>
-						Edit
-					</button>
-					<button
-						onClick={() => {
-							props.deleteSong(song);
-						}}>
-						Delete
-					</button>
 				</article>
 			))}
 		</div>
