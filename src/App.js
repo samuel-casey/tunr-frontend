@@ -18,8 +18,8 @@ function App() {
 		length: 0
 	}
 
+	
 	const [selectedSong, setSelectedSong] = React.useState(emptySong)
-
 	const selectSong = (song) => {
 		setSelectedSong(song)
 	}
@@ -64,8 +64,9 @@ function App() {
 	const handleSave = (song) => {
 		const newFavs = [...favs]
 		newFavs.push(song)
+		setFavs(newFavs)
 	}
-	setFavs(newFavs)
+	
 
 
 	return (
@@ -75,9 +76,19 @@ function App() {
 				<h2>FOR ALL YOUR PLAYLIST NEEDS</h2>
 			</header>
 			<main>
-				<Playlist {...rp} list={list} handleDelete={handleDelete} handleSave={handleSave}/>
-				<FavsList {...rp} favs={favs}/>
-				<Form {...rp} handleSubmit={handleCreate} handleUpdate={handleUpdate}/>
+				<Switch>
+					<Route path="/" render={(rp) => 
+						<>
+						<Playlist {...rp} list={list} selectSong={selectSong} handleDelete={handleDelete} handleSave={handleSave}/>
+						<FavsList {...rp} favs={favs}/>
+						<Form {...rp} song={emptySong} handleSubmit={handleCreate}/> 
+						</>
+					}/>
+					
+					<Route exact path="/edit" render={(rp) => (
+						<Form {...rp} song={selectedSong} handleSubmit={handleCreate} handleUpdate={handleUpdate}/>
+					)}/>
+				</Switch>
 			</main>
 		</>
 	);
