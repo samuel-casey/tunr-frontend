@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import './Playlist.css';
 
 function Playlist(props) {
-	const list = [{ artist: 'Ed Sheeran', title: 'All on Me', time: '3:18' }];
 
-	// const loaded = props.list.map((song, index) => {
-	const loaded = list.map((song, index) => {
+	const loaded = props.list.map((song, index) => {
 		return (
 			<div className='song' key={index}>
 				<div className='song-info'>
@@ -16,20 +14,25 @@ function Playlist(props) {
 					<span className='song-artist'>
 						<b>Artist:</b> {song.artist}
 					</span>
-					<span class='song-time'>
+					<span className='song-time'>
 						<b>Time:</b> {song.time}
 					</span>
 				</div>
 				<div className='btns'>
 					<Link to='/edit'>
-						<button className='btn save-song' onClick={props.handleSave}>
+						<button className='btn save-song' onClick={() => {props.handleSave(song)}}>
 							{'❤️'}
 						</button>
 					</Link>
-					<button className='btn edit-song' onCLick={props.selectSong}>
+					<button className='btn edit-song' onClick={
+						() => {
+							console.log('song', song)
+						props.selectSong(song);
+						props.history.push('/edit')
+						}}>
 						Edit
 					</button>
-					<button className='btn remove-song' onClick={props.handleDelete}>
+					<button className='btn remove-song' onClick={() => {props.handleDelete(song)}}>
 						Delete
 					</button>
 				</div>
@@ -42,8 +45,7 @@ function Playlist(props) {
 	return (
 		<>
 			<h3>My Playlist</h3>
-			{/* {props.list.length > 0 ? loaded : loading} */}
-			{list.length > 0 ? loaded : loading}
+			{props.list.length > 0 ? loaded : loading}
 		</>
 	);
 }

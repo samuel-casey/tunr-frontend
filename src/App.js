@@ -6,7 +6,7 @@ import FavsList from './Components/FavsList/FavsList';
 import Form from './Components/Form/Form';
 
 function App() {
-	const url = 'http://tunr-backend.herokuapp.com';
+	const url = 'http://tunr-backend.herokuapp.com/api';
 
 	const [list, setList] = React.useState([]);
 	const [favs, setFavs] = React.useState([]);
@@ -21,11 +21,13 @@ function App() {
 	const selectSong = (song) => {
 		setSelectedSong(song);
 	};
+	console.log('selectSong', selectSong)
 
 	const getSongs = () => {
-		fetch(url + '/song/')
+		fetch(url + '/songs/')
 			.then((response) => response.json())
 			.then((data) => {
+				console.log('data', data)
 				setList(data);
 			});
 	};
@@ -33,8 +35,9 @@ function App() {
 		getSongs();
 	}, []);
 
+
 	const handleCreate = (newSong) => {
-		fetch(url + '/song/', {
+		fetch(url + '/songs/', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(newSong),
@@ -42,7 +45,7 @@ function App() {
 	};
 
 	const handleUpdate = (song) => {
-		fetch(url + '/song/' + song._id, {
+		fetch(url + '/songs/' + song._id, {
 			method: 'put',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(song),
@@ -50,7 +53,8 @@ function App() {
 	};
 
 	const handleDelete = (song) => {
-		fetch(url + '/song/' + song._id, {
+		console.log('song', song)
+		fetch(url + '/songs/' + song._id, {
 			method: 'delete',
 		}).then((response) => getSongs());
 	};
@@ -81,7 +85,7 @@ function App() {
 									handleSave={handleSave}
 								/>
 								<FavsList {...rp} favs={favs} />
-								<Form {...rp} song={emptySong} handleSubmit={handleCreate} />
+								<Form {...rp} song={selectedSong} handleSubmit={handleCreate} />
 							</>
 						)}
 					/>
@@ -92,6 +96,7 @@ function App() {
 						render={(rp) => (
 							<Form
 								{...rp}
+								selectSong={selectSong}
 								song={selectedSong}
 								handleSubmit={handleCreate}
 								handleUpdate={handleUpdate}

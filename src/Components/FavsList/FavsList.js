@@ -2,6 +2,7 @@ import React from 'react';
 import './FavsList.css';
 
 function FavsList(props) {
+	console.log('favs', props)
 	const loaded = props.favs.map((fav, index) => {
 		return (
 			<div className='fav' key={index}>
@@ -19,14 +20,13 @@ function FavsList(props) {
 			</div>
 		);
 	});
-}
-const loading = 'Loading...';
+	const loading = 'Loading...';
 
-return (
-	<>
-		<h3>My Fave List</h3>
-		{props.favs.length > 0 ? loaded : loading}
-	</>
-);
+	return (
+		<>
+			<h3>My Fave List</h3>
+			{props.favs.length > 0 ? loaded : loading}
+		</>)
+}
 
 export default FavsList;
