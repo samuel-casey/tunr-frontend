@@ -17,11 +17,34 @@ function App() {
 		length: 0
 	}
 
+	// const [selectedSong, setSelectedSong] = React.useState(emptySong)
+
+	// const selectSong = (song) => {
+	// 	setSelectedSong(song)
+	// }
+
+	const getSongs = () => {
+		fetch(url + "/song/")
+		.then(response => response.json())
+		.then(data => {
+			setList(data)
+		})
+	}
+	React.useEffect(() => {
+		getSongs()}, [])
+
 	return (
-		<div className='App'>
-			<h1>Tunr</h1>
-			<img src='favicon.ico' alt='tunes' />
-		</div>
+		<>
+			<header>
+				<h1>TUNR</h1>
+				<h2>FOR ALL YOUR PLAYLIST NEEDS</h2>
+			</header>
+			<main>
+				<Playlist {...rp} list={list}/>
+				<FavsList />
+				<Form />
+			</main>
+		</>
 	);
 }
 
